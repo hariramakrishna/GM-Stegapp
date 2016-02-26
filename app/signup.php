@@ -1,18 +1,130 @@
-<!DOCTYPE html>
+<?php
+
+
+include ('db.php');
+if (isset($_POST['formsubmitted'])) {
+    $error = array();//Declare An Array to store any error message  
+    if (empty($_POST['Name'])) {//if no name has been supplied 
+        $error[] = 'Please Enter a name ';//add to array "error"
+    } else {
+        $name = $_POST['Name'];//else assign it a variable
+    }
+	
+
+    if (empty($_POST['Email'])) {
+        $error[] = 'Please Enter your Email ';
+    } else {
+
+
+        if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail'])) {
+           //regular expression for email validation
+            $Email = $_POST['Email'];
+        } else {
+             $error[] = 'Your EMail Address is invalid  ';
+        }
+
+    }
+
+
+    if (empty($_POST['Password'])) {
+        $error[] = 'Please Enter Your Password ';
+    } else {
+        $Password = $_POST['Password'];
+    }
+
+
+    if (empty($error)) //send to Database if there's no error '
+
+    { // If everything's OK...
+
+        // Make sure the email address is available:
+        $query_verify_email = "SELECT * FROM guesttable  WHERE email ='$Email'";
+        $result_verify_email = mysqli_query($dbc, $query_verify_email);
+        if (!$result_verify_email) {//if the Query Failed ,similar to if($result_verify_email==false)
+            echo ' Database Error Occured ';
+        }
+
+        if (mysqli_num_rows($result_verify_email) == 0) { // IF no previous user is using this email .
+
+
+            // Create a unique  activation code:
+            $activation = md5(uniqid(rand(), true));
+
+
+            $query_insert_user = "INSERT INTO guesttable ( fname, lname, email, password, activation) VALUES ( '$name', '$lastname', '$Email', '$Password', '$activation')";
+
+
+            $result_insert_user = mysqli_query($dbc, $query_insert_user);
+            if (!$result_insert_user) {
+                echo 'Query Failed ';
+            }
+
+            if (mysqli_affected_rows($dbc) == 1) { //If the Insert Query was successfull.
+
+
+                // Send the email:
+               /* $message = " To activate your account, please click on this link:\n\n";
+                $message .= WEBSITE_URL . '/activate.php?email=' . urlencode($Email) . "&key=$activation";
+                mail($Email, 'Registration Confirmation', $message, 'From: ismaakeel@gmail.com');  */
+				
+				include 'smtp/Send_Mail.php';
+				$to=$Email;
+				$subject="Confirm Registration";
+				$body='<i>Dear</i> '.$name.', <br/> <br/> Thank You for Registering for <b>Harry\'s GuestBook</b>. Please verify your email and get started using your Website account. <br/> <br/> <a href="'.$base_url.'/activate.php?key='.$activation.'">'.$base_url.'/activate.php?key='.$activation.'</a><br/> <br/>Thanks & Regards,<br/><b><i>-Harry</i></b>';
+				Send_Mail($to,$subject,$body);
+
+                // Flush the buffered output.
+
+
+                // Finish the page:
+                echo '<div class="success">Thank you for
+registering! A confirmation email
+has been sent to '.$Email.' Please click on the Activation Link to Activate your account </div>';
+
+
+            } else { // If it did not run OK.
+                echo '<div class="errormsgbox">You could not be registered due to a system
+error. We apologize for any
+inconvenience.</div>';
+            }
+
+        } else { // The email address is not available.
+            echo '<div class="errormsgbox" >That email
+address has already been registered.
+</div>';
+        }
+
+    } else {//If the "error" array contains error msg , display them
+        
+        
+
+echo '<div class="errormsgbox"> <ol>';
+        foreach ($error as $key => $values) {
+            
+            echo '	<li>'.$values.'</li>';
+
+
+       
+        }
+        echo '</ol></div>';
+
+    }
+  
+    mysqli_close($dbc);//Close the DB Connection
+
+} // End of the main Submit conditional.
+
+
+
+?>
+
+
+
 <html lang="en">
-<!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->
+
 <head>
   <meta charset="utf-8">
-  <title>Lava | Designed By Theme Armada</title>
-  <meta name="keywords" content="made with bootstrap, wrap bootstrap themes, bootstrap agency themes, creative bootstrap sites, Lava theme, responsive bootstrap theme, mobile website themes, bootstrap portfolio, theme armada">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
-  
-  <meta property="og:title" content="Lava | Designed By Theme Armada">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="http://www.themearmada.com/demos/lava">
-	<meta property="og:site_name" content="Theme Armada">
-	<meta property="og:description" content="made with bootstrap, wrap bootstrap themes, bootstrap agency themes, creative bootstrap sites, Lava theme, responsive bootstrap theme, mobile website themes, bootstrap portfolio, theme armada">
+  <title>StegApp</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -101,7 +213,7 @@
           			<div class="controls">
           			    <div class="input-prepend">
           			     <span class="add-on"><i class="fa fa-user"></i></span>
-          					<input type="text" id="fname" name="fname" placeholder="Full Name">
+          					<input type="text" id="Name" name="Name" placeholder="Full Name">
           				</div>
           			</div>
           		</div>
@@ -110,7 +222,7 @@
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-envelope"></i></span>
-          					<input type="text" id="email" name="email" placeholder="Email">
+          					<input type="text" id="Email" name="Email" placeholder="Email">
           				</div>
           			</div>
           		</div>
@@ -119,14 +231,14 @@
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-lock"></i></span>
-          					<input type="Password" id="passwd" name="passwd" placeholder="Password">
+          					<input type="Password" id="Password" name="Password" placeholder="Password">
           				</div>
           			</div>
           		</div>
           
           		<div class="control-group">
           	      <div class="controls">
-          	       <button type="submit" class="btn-main"><i class="fa fa-user"></i> Create My Account</button>
+          	       <button type="submit" class="btn-main" name="formsubmitted"><i class="fa fa-user"></i> Create My Account</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Already Registered?</small></a>
           	  </div>
