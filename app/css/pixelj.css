@@ -1,0 +1,69 @@
+
+.section1 {
+    width: 450px;
+    margin: auto;
+    overflow: auto;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.dark {
+    background-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
+    border-color: dimgray;
+}
+
+.sectionbody1 {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.step1 {
+    text-transform: uppercase;
+    position: absolute;
+    margin-top: -50px;
+    margin-left: -50px;
+    background-color: dimgray;
+    color: lightgray;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.left1 {
+    width: 45%;
+    float: left;
+}
+
+.right1 {
+    width: 45%;
+    float: right;
+}
+
+.password1 {
+    width: 100%;
+}
+
+.message1 {
+    width: 100%;
+    height: 100px;
+}
+
+.submit1 {
+    float: right;
+}
+
+.preview1 {
+    margin-top: 30px;
+    width: 100px;
+    float: right;
+}
+
+.hide1 {
+    display: none;
+}
+
+#output[src] {
+    margin-bottom: 1em;
+    box-shadow: 0px 0.5em 1em rgba(0,0,0,0.5);
+}
