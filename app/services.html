@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/custom-styles.css">
+  
+  <link href='css/pixelj.css' type='text/css' rel='stylesheet' />
 
 
   <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -68,36 +70,45 @@
               <li><a href="blog.html">Blog</a></li>
               <li><a href="contact.html">Contact</a></li>
           </ul>
-        </div><!--/.navbar-collapse -->
+        </div>
       </div>
     </div>
 	
-      
-	  
-<!-- 	      <div id='choose' class='section dark hide'>
-        <div class='step'>What do you want to do?</div>
-        <div class='sectionbody'>
-            <div class='left'>
-                <textarea id='message' class='message' maxlength='1000'
+ 
+<!-- 	  <p> jhgsfjr</p>
+
+	<div id='main' class='section1 dark1'>
+        <div class='step'>Choose an imagea</div>
+        <img id='preview' class='preview1 hide1' />
+        <div class='sectionbody1'>
+            <input type='file' id='file' />
+        </div>
+    </div>
+    <div id='choose' class='section1 dark1 hide1'><p> jhgsfjr1</p>
+        <div class='step1'>What do you want to do?</div><p> jhgsfjr2</p>
+        <div class='sectionbody1'><p> jhgsfjr3</p>
+            <div class='left1'><p> jhgsfjr4</p>
+                <textarea id='message' class='message1' maxlength='1000'
                     placeholder='Type hidden message'></textarea>
-                <input type='password' id='password' class='password'
+                <input type='password' id='password' class='password1'
                     placeholder='Password (optional)' />
-                <button id='encode' class='submit'>Hide message</button>
+                <button id='encode' class='submit1'>Hide message</button>
             </div>
-            <div class='right'>
-                <input type='password' id='password2' class='password'
+            <div class='right1'>
+                <input type='password' id='password2' class='password1'
                     placeholder='Password' />
-                <button id='decode' class='submit'>Reveal message</button>
+                <button id='decode' class='submit1'>Reveal message</button>
             </div>
         </div>
     </div>
-    <div id='reveal' class='section dark hide'>
-        <div class='step'>Hidden message</div>
-        <div id='messageDecoded' class='sectionbody'></div>
+    <div id='reveal1' class='section1 dark1 hide1'>
+        <div class='step1'>Hidden message</div>
+        <div id='messageDecoded' class='sectionbody1'></div>
     </div>
-    <canvas id='canvas' class='hide'></canvas>
+    <canvas id='canvas' class='hide1'></canvas>
     <img id='output' /> -->
-	  
+
+
 	  
 	  
 
@@ -107,46 +118,42 @@
         <div class="row margin-60">
           <div class="col-sm-12">
             <h3>Services</h3>
-            <p class="lead">See what we do</p>
-			<div id='main' class='section dark'>
+			
+			
+			
+<!--             <p class="lead">See what we do</p>
+			 <div id='main' class='section dark'>
 				<div class='step'>Choose an image</div>
-				<input type='file' id='file' />
+				<img id='preview' class='preview hide' />
+				<input type='file' id='file' /> -->
         
             
 					<!-- id="open_btn" // from dragdrop to open modal-->
 					<!-- onclick="encode()"  // from core.js to perform encode operation-->
-					<button id="open_btn" onclick="encode()" class="btn btn-primary">Open Choose File</button>
-					<canvas id='canvas' class='hide'></canvas>
+					<!-- <button id="open_btn" onclick="encode()" class="btn btn-primary">Open Choose File</button> -->
+<!-- 					<canvas id='canvas' class='hide'></canvas>
 					<img id='output' />
 
-				</div>
-	
-        
+			</div> --> 
+			
+
+			<iframe src="pj/index.html" style="height:800px;width:70%;border:none;overflow:hidden;">
+			  <p>Your browser does not support iframes.</p>
+			</iframe>
+
+			
+
+
+
+
+
 
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
         </div>
 		
 		
-		<div id='choose' class='section dark hide'>
-        <div class='step'>What do you want to do?</div>
-        <div class='sectionbody'>
-            <div class='left'>
-                <textarea id='message' class='message' maxlength='1000'
-                    placeholder='Type hidden message'></textarea>
-                <input type='password' id='password' class='password'
-                    placeholder='Password (optional)' />
-                <button id='encode' class='submit'>Hide message</button>
-            </div>
-            <div class='right'>
-                <input type='password' id='password2' class='password'
-                    placeholder='Password' />
-                <button id='decode' class='submit'>Reveal message</button>
-            </div>
-        </div>
-    </div>
-		
-		
+	
         
         <!--First Service Row-->
         <div class="row">
@@ -336,6 +343,7 @@
 	<script src="dragdist/bootstrap.fd.js"></script>
 	<script type="text/javascript">
 
+	
         </script>
     
    

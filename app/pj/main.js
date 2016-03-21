@@ -12,19 +12,6 @@ window.onload = function() {
     var decodeButton = document.getElementById('decode');
     decodeButton.addEventListener('click', decode);
 };
-/*var files;
-        $("#open_btn").click(function() {
-            $.FileDialog({accept: "*.jpg"}).on('files.bs.filedialog', function(ev) {
-                files = ev.files;
-                var text = "";
-                files.forEach(function(f) {
-                    text += f.name + "<br/>";
-                });
-                $("#output").html(text);
-            }).on('cancel.bs.filedialog', function(ev) {
-                $("#output").html("Cancelled!");
-            });
-        }); */
 
 // artificially limit the message size
 var maxMessageSize = 1000;
@@ -48,8 +35,8 @@ var importImage = function(e) {
         var img = new Image();
         img.onload = function() {
             var ctx = document.getElementById('canvas').getContext('2d');
-            ctx.canvas.width = img.width; 
-            ctx.canvas.height = img.height;
+            ctx.canvas.width = img.width; console.log(img.width);
+            ctx.canvas.height = img.height; console.log(" <> "+img.height);
             ctx.drawImage(img, 0, 0);
 
             decode();
@@ -61,14 +48,12 @@ var importImage = function(e) {
 };
 
 // encode the image and save it
-var encode = function() { console.log("Hell der"); 				console.log(files[0].name);
-    var message = "yaaahohhh";//document.getElementById('message').value;
+var encode = function() {
+    var message = document.getElementById('message').value;
     var password = document.getElementById('password').value;
     var output = document.getElementById('output');
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
-	
-	console.log("inside Encode");
 
     // encrypt the message with supplied password if necessary
     if (password.length > 0) {
@@ -104,7 +89,6 @@ var encode = function() { console.log("Hell der"); 				console.log(files[0].name
 
 // decode the image and display the contents if there is anything
 var decode = function() {
-	console.log("inside Decode");
     var password = document.getElementById('password2').value;
     var passwordFail = 'Password is incorrect or there is nothing here.';
 
