@@ -56,7 +56,7 @@ p {
 }
 
 p.lead {
-  color: #ff755a;
+  color: #337AB7;
 }
 
 a {
@@ -70,7 +70,7 @@ a:hover {
 }
 
 .btn-main {
-	  background: #ff755a repeat scroll 0 0;
+	  background: #337AB7 repeat scroll 0 0;
     border: none;
     font-weight: 800;
     border-radius: 2px;
@@ -84,7 +84,7 @@ a:hover {
 }
 
 .btn-main:hover {
-	background: #dc644b repeat scroll 0 0;
+	background: #23527B repeat scroll 0 0;
 	color: #FFFFFF;
 	text-decoration: none;
 	transition: all 0.35s ease-in-out;
@@ -105,11 +105,11 @@ a:hover {
 }
 
 ::selection {
-	background: #ff755a; /* Safari */
+	background: #337AB7; /* Safari */
 	color: #FFFFFF;
 }
 ::-moz-selection {
-	background: #ff755a; /* Firefox */
+	background: #337AB7; /* Firefox */
 	color: #FFFFFF;
 }
 
@@ -179,7 +179,7 @@ a:hover {
   color: #FFFFFF;
 }
 .orange {
-  color: #ff755a;
+  color: #337AB7;
 }
 
 
@@ -187,13 +187,13 @@ a:hover {
    Navigation styles
    ========================================================================== */
 .navbar-inverse {
-    background-color: #ff755a;
+    background-color: #337AB7;
     border-color: transparent;
 }
 
 
 .nav-collapse, .nav-collapse.collapse {
-    background: none repeat scroll 0 0 #ff755a;
+    background: none repeat scroll 0 0 #337AB7;
     height: 0;
     overflow: hidden;
 }
@@ -277,7 +277,7 @@ a:hover {
     background-image: none;
     background-image: -webkit-linear-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(transparent));
     background-repeat: no-repeat;
-    color: #ff755a;
+    color: #337AB7;
     text-decoration: none;
 }
 
@@ -326,7 +326,7 @@ a:hover {
 
 .carousel-control {
     background: none repeat scroll 0 0;
-    background-color: rgba(253,90,62,0.9);
+    background-color: rgba(51,122,183,1);
     border: 0px solid;
     border-radius: 0px;
     font-size: 22px;
@@ -478,7 +478,7 @@ a:hover {
 }
 
 .side-links li a {
-  color: #ff755a;
+  color: #337AB7;
   font-weight: 600;
 }
 
@@ -487,8 +487,8 @@ a:hover {
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #ff755a;
-    border-color: #ff755a;
+    background-color: #337AB7;
+    border-color: #337AB7;
     color: #FFFFFF;
     cursor: default;
     z-index: 2;
@@ -647,7 +647,7 @@ a:hover {
 }
 
 .team-info {
-  background: #ff755a;
+  background: #337AB7;
   padding: 10px 10px 10px 10px;
   height: 60px;
 }
@@ -701,7 +701,7 @@ a:hover {
 
 
 .headline {
-  background: #ff755a;
+  background: #337AB7;
   padding: 6px 6px 0px 6px;
   background-size: contain;
   position: relative;
@@ -721,7 +721,7 @@ bottom: -15px;
 left: 44%;
 border-style: solid;
 border-width: 15px 15px 0;
-border-color: #ff755a transparent;
+border-color: #337AB7 transparent;
 display: block;
 z-index: 1;
 }
@@ -965,7 +965,7 @@ ul.icons li {
 }
 
 .testimonial-source {
-  background: #ff755a;
+  background: #337AB7;
   text-align: center;
   padding: 12px 14px;
   color: #FFFFFF;
@@ -1036,7 +1036,7 @@ ul.icons li {
 }
 
 #bottom p a:hover {
-  color: #ff755a;
+  color: #337AB7;
 	text-decoration: none;
 }
 
@@ -1059,7 +1059,7 @@ ul.social-icons li {
 }
 
 ul.social-icons li a {
-	color: #ff755a;
+	color: #337AB7;
 	text-decoration: none;
 }
 
