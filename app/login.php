@@ -1,4 +1,100 @@
-<!DOCTYPE html>
+<?php
+
+
+
+include ('db.php');
+if (isset($_POST['formsubmitted']))
+{
+    // Initialize a session:
+	session_start();
+    $error = array();//this aaray will store all error messages
+  
+
+    if (empty($_POST['Email']))//if the email supplied is empty 
+	{
+        $error[] = 'You forgot to enter  your Email ';
+    }
+	else
+	{
+        /*if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail']))
+		{ */          
+            $Email = $_POST['Email'];
+        /*}
+		else
+		{
+             $error[] = 'Your EMail Address is invalid  ';
+        }*/
+
+
+    }
+print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
+
+    if (empty($_POST['Password']))
+	{
+        $error[] = 'Please Enter Your Password ';
+    }
+	else
+	{
+        $Password = $_POST['Password'];
+		print $Password;
+    }
+
+
+    if (empty($error))//if the array is empty , it means no error found
+    {
+        $query_check_credentials = "SELECT * FROM user WHERE (email='$Email' AND password='$Password') AND status='1'";
+   
+        $result_check_credentials = mysqli_query($dbc, $query_check_credentials);
+        if(!$result_check_credentials)//If the QUery Failed 
+		{
+            echo 'Query Failed ';
+        }
+
+        if (@mysqli_num_rows($result_check_credentials) == 1)//if Query is successfull 
+        { // A match was made.
+
+            //$_SESSION = mysqli_fetch_array($result_check_credentials, MYSQLI_ASSOC);//Assign the result of this query to SESSION Global Variable
+			session_start();
+			$_SESSION['EXPIRES'] = time();
+            header("Location: services.php");
+        }
+		else
+        {  
+            $msg_error= 'Either Your Account is inactive or Email address /Password is Incorrect';
+        }
+
+    }
+	else
+	{ 
+
+		echo '<div class="errormsgbox"> <ol>';
+        foreach ($error as $key => $values)
+		{           
+            echo '	<li>'.$values.'</li>';
+       
+        }
+        echo '</ol></div>';
+
+    }
+    
+    
+    if(isset($msg_error))
+	{        
+        echo '<div class="warning">'.$msg_error.' </div>';
+    }
+    /// var_dump($error);
+    mysqli_close($dbc);
+
+} // End of the main Submit conditional.
+
+
+
+?>
+
+
+
+
+
 <html lang="en">
 <!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->
 <head>
@@ -32,9 +128,131 @@
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../../apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="../../../../../apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="../../../../../favicon.html">
+  
+  <style type="text/css">
+
+ .success {
+	border: 1px solid;
+	margin: 0 auto;
+	padding:10px 50px 10px 60px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+    
+     width:450px;
+     color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('images/success.png');
+     
+}
+
+
+
+ .errormsgbox {
+	border: 1px solid;
+	margin: 0 auto;
+	padding:10px 5px 10px 60px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+
+     width:450px;
+    	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('images/error.png');
+     
+}
+
+</style>
+  
+  
+  
 </head>
 
 <body>
+
+<?php
+	//include ('db.php');
+
+	/*if (isset($_GET['email']) && preg_match('/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/', $_GET['email']))
+	{
+		$email = $_GET['email'];
+	}*/
+	if (isset($_GET['key']) && (strlen($_GET['key']) == 32))//The Activation key will always be 32 since it is MD5 Hash
+	{
+		$key = $_GET['key'];
+	}
+
+
+	if (isset($key)) 
+	{
+
+		// Update the database to set the "status" field to '1'
+
+		/*$query_activate_account = "UPDATE members SET Activation=NULL WHERE(Email ='$email' AND Activation='$key')LIMIT 1";
+
+	   
+		$result_activate_account = mysqli_query($dbc, $query_activate_account) ;*/
+
+		//////////////////////////////////
+		
+		//$code=mysqli_real_escape_string($connection,$_GET['code']);
+
+
+		$c=mysqli_query($dbc,"SELECT email FROM user WHERE activation='$key'");
+
+		if(mysqli_num_rows($c) > 0)
+		{
+
+			$count=mysqli_query($dbc,"SELECT email FROM user WHERE activation='$key' and status='0'");
+
+			if(mysqli_num_rows($count) == 1)
+			{
+				mysqli_query($dbc,"UPDATE user SET status='1' WHERE activation='$key'");
+				//$msg="Your account is activated";	
+				
+				print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn css!";
+				echo '<div class="success">Your account is now active. You may now <a href="login.php">Log in</a></div>';
+				//echo '<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"><div class="modal-dialog modal-lg"><div class="modal-content">congrats</div></div></div>';
+			}
+			else
+			{
+				//$msg ="Your account is already active, no need to activate again";
+				echo '<div class="errormsgbox">Your account is already active, no need to activate again...!You may now <a href="login.php">Log in</a></div>';
+			}
+
+		}
+		else
+		{
+			//$msg ="Wrong activation code.";
+			echo '<div class="errormsgbox">Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+		}
+		
+		////////////////////////////////
+		
+		// Print a customized message:
+	  /*  if (mysqli_affected_rows($dbc) == 1)//if update query was successfull
+		{
+		echo '<div class="success">Your account is now active. You may now <a href="login.php">Log in</a></div>';
+
+		} else
+		{
+			echo '<div class="errormsgbox">Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
+
+		}*/
+
+		mysqli_close($dbc);
+
+	}
+	else
+	{
+			echo '<div class="errormsgbox">Error Occured .</div>';
+	}
+
+
+?>
+
+
+
+
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -100,8 +318,8 @@
           		<div class="control-group">
           			<div class="controls">
           			    <div class="input-prepend">
-          			     <span class="add-on"><i class="fa fa-user"></i></span>
-          					<input type="text" class="input-xlarge" id="fname" name="fname" placeholder="Username">
+          			     <span class="add-on"><i class="fa fa-envelope"></i></span>
+          					<input type="text" class="input-xlarge" id="Email" name="Email" placeholder="Email">
           				</div>
           			</div>
           		</div>
@@ -110,14 +328,14 @@
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-lock"></i></span>
-          					<input type="Password" id="passwd" class="input-xlarge" name="passwd" placeholder="Password">
+          					<input type="Password" id="Password" class="input-xlarge" name="Password" placeholder="Password">
           				</div>
           			</div>
           		</div>
           
           		<div class="control-group">
           	      <div class="controls">
-          	       <button type="submit" class="btn-main"><i class="fa fa-sign-in"></i> Log In</button>
+          	       <button type="submit" class="btn-main" name="formsubmitted"><i class="fa fa-sign-in"></i> Log In</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>
           	  </div>

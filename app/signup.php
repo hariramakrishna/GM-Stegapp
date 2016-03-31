@@ -7,7 +7,8 @@ if (isset($_POST['formsubmitted'])) {
     if (empty($_POST['Name'])) {//if no name has been supplied 
         $error[] = 'Please Enter a name ';//add to array "error"
     } else {
-        $name = $_POST['Name'];//else assign it a variable
+        $name = $_POST['Name'];
+		echo $name;//else assign it a variable
     }
 	
 
@@ -16,12 +17,12 @@ if (isset($_POST['formsubmitted'])) {
     } else {
 
 
-        if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail'])) {
+        //if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail'])) {
            //regular expression for email validation
             $Email = $_POST['Email'];
-        } else {
-             $error[] = 'Your EMail Address is invalid  ';
-        }
+        /*} else {
+             $error[] = $name;
+        }*/
 
     }
 
@@ -35,10 +36,10 @@ if (isset($_POST['formsubmitted'])) {
 
     if (empty($error)) //send to Database if there's no error '
 
-    { // If everything's OK...
+    {   // If everything's OK...
 
         // Make sure the email address is available:
-        $query_verify_email = "SELECT * FROM guesttable  WHERE email ='$Email'";
+        $query_verify_email = "SELECT * FROM user  WHERE email ='$Email'";
         $result_verify_email = mysqli_query($dbc, $query_verify_email);
         if (!$result_verify_email) {//if the Query Failed ,similar to if($result_verify_email==false)
             echo ' Database Error Occured ';
@@ -51,7 +52,7 @@ if (isset($_POST['formsubmitted'])) {
             $activation = md5(uniqid(rand(), true));
 
 
-            $query_insert_user = "INSERT INTO guesttable ( fname, lname, email, password, activation) VALUES ( '$name', '$lastname', '$Email', '$Password', '$activation')";
+            $query_insert_user = "INSERT INTO user ( name, email, password, activation) VALUES ( '$name', '$Email', '$Password', '$activation')";
 
 
             $result_insert_user = mysqli_query($dbc, $query_insert_user);
@@ -70,7 +71,7 @@ if (isset($_POST['formsubmitted'])) {
 				include 'smtp/Send_Mail.php';
 				$to=$Email;
 				$subject="Confirm Registration";
-				$body='<i>Dear</i> '.$name.', <br/> <br/> Thank You for Registering for <b>Harry\'s GuestBook</b>. Please verify your email and get started using your Website account. <br/> <br/> <a href="'.$base_url.'/activate.php?key='.$activation.'">'.$base_url.'/activate.php?key='.$activation.'</a><br/> <br/>Thanks & Regards,<br/><b><i>-Harry</i></b>';
+				$body='<i>Dear</i> '.$name.', <br/> <br/> Thank You for Registering for <b>Harry\'s GuestBook</b>. Please verify your email and get started using your Website account. <br/> <br/> <a href="'.$base_url.'/login.php?key='.$activation.'">'.$base_url.'/signup.php?key='.$activation.'</a><br/> <br/>Thanks & Regards,<br/><b><i>-Harry</i></b>';
 				Send_Mail($to,$subject,$body);
 
                 // Flush the buffered output.
@@ -231,7 +232,7 @@ echo '<div class="errormsgbox"> <ol>';
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-lock"></i></span>
-          					<input type="Password" id="Password" name="Password" placeholder="Password">
+          					<input type="Password" id="Password" name="Password" placeholder="Password" data-error="Before you wreck yourself" required>
           				</div>
           			</div>
           		</div>

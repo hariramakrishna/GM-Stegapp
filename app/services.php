@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+
+
+<?php
+include ('db.php');
+/* $servername = "localhost";
+$username = "hgurram"; //"hgurram";
+$password = "hg7180";//"hg7180";
+$dbname = "hgurram"; */
+
+	    session_start();echo "started";
+	if (!isset($_SESSION['EXPIRES']) || $_SESSION['EXPIRES'] < time()-10) {echo "in a if cond";
+		session_unset();
+		session_destroy();
+		$_SESSION = array();
+		header("Location: login.php");
+	}
+	else
+	{echo "else a if cond";
+		$_SESSION['EXPIRES'] = time();
+	}
+echo "endedd";
+	
+?>
+
+
+
 <html lang="en">
 
 <head>
