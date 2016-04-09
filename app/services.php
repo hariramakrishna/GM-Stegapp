@@ -367,6 +367,8 @@ echo "endedd";
 	<script src='js/core.js' type='text/javascript'></script>
 	<script src='js/sjcl.js' type='text/javascript'></script>
 	<script src="dragdist/bootstrap.fd.js"></script>
+	
+	
 	<script type="text/javascript">
 
 	

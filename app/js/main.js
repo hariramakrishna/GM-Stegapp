@@ -8,5 +8,6 @@ $(function() {
         if (scroll >= 500) {
             animate.removeClass('display-none').addClass("display");
         } 
-    });
+    });	
+	
 });

@@ -3,6 +3,7 @@
 
 
 include ('db.php');
+$pattern = "";
 if (isset($_POST['formsubmitted']))
 {
     // Initialize a session:
@@ -89,6 +90,97 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 
 
 
+//formsubmit on pattern button. onclick, get the email and retreive pattern from DB and send to modal for validation.
+if (isset($_POST['formsubmitted1']))
+{
+    // Initialize a session:
+	session_start();
+    $error = array();//this aaray will store all error messages
+  
+
+    if (empty($_POST['Email']))//if the email supplied is empty 
+	{
+        $error[] = 'You forgot to enter  your Email ';
+    }
+	else
+	{
+        /*if (preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_POST['e-mail']))
+		{ */          
+            $Email = $_POST['Email'];
+        /*}
+		else
+		{
+             $error[] = 'Your EMail Address is invalid  ';
+        }*/
+
+
+    }
+print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
+
+   /* if (empty($_POST['Password']))
+	{
+        $error[] = 'Please Enter Your Password ';
+    }
+	else
+	{
+        $Password = $_POST['Password'];
+		print $Password;
+    }*/
+
+
+    if (empty($error))//if the array is empty , it means no error found
+    {
+        $query_check_credentials = "SELECT * FROM user WHERE (email='$Email') AND status='1'";
+   
+        $result_check_credentials = mysqli_query($dbc, $query_check_credentials);
+        if(!$result_check_credentials)//If the QUery Failed 
+		{
+            echo 'Query Failed ';
+        }
+
+        if (@mysqli_num_rows($result_check_credentials) == 1)//if Query is successfull 
+        { // A match was made.
+
+            $temp = mysqli_fetch_array($result_check_credentials, MYSQLI_ASSOC);//Assign the result of this query to SESSION Global Variable
+			
+			$pattern = $temp["pattern"];
+			print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
+			print $pattern;
+			session_start();
+			$_SESSION['EXPIRES'] = time();
+            //header("Location: services.php");
+        }
+		else
+        {  
+            $msg_error= 'Either Your Account is inactive or Email address /Password is Incorrect';
+        }
+
+    }
+	else
+	{ 
+
+		echo '<div class="errormsgbox"> <ol>';
+        foreach ($error as $key => $values)
+		{           
+            echo '	<li>'.$values.'</li>';
+       
+        }
+        echo '</ol></div>';
+
+    }
+    
+    
+    if(isset($msg_error))
+	{        
+        echo '<div class="warning">'.$msg_error.' </div>';
+    }
+    /// var_dump($error);
+    mysqli_close($dbc);
+
+}
+
+
+
 ?>
 
 
@@ -96,7 +188,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 
 
 <html lang="en">
-<!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->
+
 <head>
   <meta charset="utf-8">
   <title>Lava | Designed By Theme Armada</title>
@@ -119,6 +211,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/custom-styles.css">
+  
+  <link href="patternLock/patternLock.css"  rel="stylesheet" type="text/css" />
 
   <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -179,7 +273,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	if (isset($_GET['key']) && (strlen($_GET['key']) == 32))//The Activation key will always be 32 since it is MD5 Hash
 	{
 		$key = $_GET['key'];
-	}
+
 
 
 	if (isset($key)) 
@@ -246,7 +340,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	{
 			echo '<div class="errormsgbox">Error Occured .</div>';
 	}
-
+	}
 
 ?>
 
@@ -314,7 +408,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
     					 
     					 <p>------------ OR -------------</p>
               
-              <form id="signup-form" class="form-horizontal" method="post" action="#">
+              <form id="signup-form" class="form-horizontal">
           		<div class="control-group">
           			<div class="controls">
           			    <div class="input-prepend">
@@ -335,10 +429,35 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           
           		<div class="control-group">
           	      <div class="controls">
-          	       <button type="submit" class="btn-main" name="formsubmitted"><i class="fa fa-sign-in"></i> Log In</button>
+          	       <button class="btn-main" onclick = "login()"><i class="fa fa-sign-in"></i> Log Ini</button>
+				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i>Pattern</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>
-          	  </div>
+          	  </div>	    
+			  
+			  
+			  <!--<button id="button2" type="button" class="btn-main" name="formsubmitted1" data-toggle="modal" data-target="#myModal"><i class="fa fa-spinner"></i>Pattern</button>-->
+
+					  <!-- Modal -->
+					  <div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Draw your Pattern</h4>
+							</div>
+							<div class="modal-body">
+								<div id="patternHolder1" class="pattern-holder patt-holder" style="width: 310px; height: 310px; position: relative;"></div>
+							  
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						  </div>
+						  
+						</div>
       
           	  </form>
       	  
@@ -392,11 +511,89 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
     <!-- Javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../../../../../ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
+	
+	<script src="patternLock/patternLock.js"></script>
+   <script>
    
+		$(document).ready(function(){ // run's on each page load
+			
+			// Validate form fields and open modal
+			
+			$("#pattern-button").click(function(){
+				if($("#Email").val())
+				{
+					$("#myModal").modal("show");
+				}
+				else
+					console.log("Enter you email id");
+			});
+
+		});
+   
+		var lock = new PatternLock('#patternHolder1',{
+			onDraw:function(pattern){
+				checkPattern(pattern);
+				
+				/* if(pattern == '123')
+					console.log("jumbooo");
+				pattern=''; */
+			}
+		});
+		function checkPattern (pattern){
+			console.log(pattern);
+			//var patternCode = pattern;
+
+			var url = "pattern_check.php"; //write the get pattern url
+			var email = $("#Email").val();
+			$.post(url, { patternCode : pattern, user_email : email }, function(response,status){
+				//alert("from php: " + response+"\n\nStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+				console.log("post call back");
+				console.log(response);
+				$("#myModal").modal("hide");
+				lock.reset();
+				
+				if(response == "true")
+				{
+					window.location = <?php echo "\"/app-v/services.php\""?>;
+				}
+				else
+					window.alert(response);
+
+				$("#signup-form")[0].reset();
+				/* if(pattern == data){
+					//write the required process code here
+				} */					
+			});			
+		}
+		
+		function login(){
+			console.log("Entered login function.");
+			// this code is to collect the form in the required format using Jquery
+			var obj_to_send = {
+				email : $("#Email").val(),
+				password : $("#Password").val()				
+			}
+			console.log(obj_to_send);
+			
+			var url = ""; //write the url to post login form data in JSON format.
+			/*$.post(url, obj_to_send, function(result){
+				//check for call success after posting the data
+			});*/
+			
+			
+		}
+  </script>
+  <script type="text/javascript">
+
+						$("#mainButton").click(function(){
+								$( "#button2" ).click();
+								console.log("i am In");
+								});
+				</script>
     </body>
 
 <!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->

@@ -1,0 +1,28 @@
+
+<html>
+<head>
+	<link href="patternLock.css"  rel="stylesheet" type="text/css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+	<script src="patternLock.js"></script>
+</head>
+<body>
+
+<div id="patternHolder1" class="pattern-holder patt-holder" style="width: 310px; height: 310px; position: relative;"></div>
+
+	<script type="text/javascript">
+	//var lock = new PatternLock("#patternHolder1",{lineOnMove:false});
+	var lock = new PatternLock('#patternHolder1',{
+    onDraw:function(pattern){
+        console.log(pattern);
+		if(pattern == '123')
+			console.log("jumbooo");
+    }
+});
+	
+
+
+	
+        </script>
+
+</body>
+</html>
