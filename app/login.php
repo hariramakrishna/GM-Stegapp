@@ -211,8 +211,12 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/custom-styles.css">
+
   
   <link href="patternLock/patternLock.css"  rel="stylesheet" type="text/css" />
+  <link href="pin/css/bootstrap-pincode-input.css" rel="stylesheet">
+
+
 
   <script src="js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
@@ -429,7 +433,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           
           		<div class="control-group">
           	      <div class="controls">
-          	       <button class="btn-main" onclick = "login()"><i class="fa fa-sign-in"></i> Log Ini</button>
+          	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Log Ini</button>
 				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i>Pattern</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>
@@ -438,8 +442,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 			  
 			  <!--<button id="button2" type="button" class="btn-main" name="formsubmitted1" data-toggle="modal" data-target="#myModal"><i class="fa fa-spinner"></i>Pattern</button>-->
 
-					  <!-- Modal -->
-					  <div class="modal fade" id="myModal" role="dialog">
+					<!-- Modal Pattern -->
+					<div class="modal fade" id="myModal" role="dialog">
 						<div class="modal-dialog">
 						
 						  <!-- Modal content-->
@@ -448,8 +452,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
 							  <h4 class="modal-title">Draw your Pattern</h4>
 							</div>
-							<div class="modal-body">
-								<div id="patternHolder1" class="pattern-holder patt-holder" style="width: 310px; height: 310px; position: relative;"></div>
+							<div class="modal-body row">
+								<div id="patternHolder1" class="pattern-holder patt-holder col-sm-offset-3" style="width: 310px; height: 310px; position: relative;"></div>
 							  
 							</div>
 							<div class="modal-footer">
@@ -458,6 +462,29 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 						  </div>
 						  
 						</div>
+					</div>
+					
+					<!-- Modal OTP -->
+					<div class="modal fade" id="myModalPin" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Key-in your OTP </h4>
+							</div>
+							<div class="modal-body" id="multi-input" style="background-color:#337AB7">
+								<input type="text" id="demo">
+						  
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						  </div>
+						  
+						</div>
+					</div>
       
           	  </form>
       	  
@@ -517,19 +544,47 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
     <script src="js/main.js"></script>
 	
 	<script src="patternLock/patternLock.js"></script>
+	<script type="text/javascript" src="pin/js/bootstrap-pincode-input.js"></script>
    <script>
    
 		$(document).ready(function(){ // run's on each page load
 			
-			// Validate form fields and open modal
-			
+			// Validate form fields and open modal for pattern			
 			$("#pattern-button").click(function(){
 				if($("#Email").val())
 				{
 					$("#myModal").modal("show");
 				}
 				else
-					console.log("Enter you email id");
+					window.alert("Enter you email id");
+			});
+			
+
+			/**  OTP Pin match
+			  *
+			  */
+			// Validate form fields and open modal for Pin Pad
+			$("#pin").click(function(){
+				if($("#Email").val())
+				{
+					// Ajax call to insert a random otp to DB and send a sms with registered mobile number.
+					var url = "send_otp_sms.php";
+					var email = $("#Email").val();
+					console.log(email);
+					/*$.post(url, { user_email : email }, function(response,status){
+						if(response == "true")
+						{
+							$("#myModalPin").modal("show");
+						}
+						else
+							window.alert(response);
+
+					});	*/
+						$("#myModalPin").modal("show");
+						
+				}
+				else
+					window.alert("Enter you email id");
 			});
 
 		});
@@ -570,22 +625,58 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 			});			
 		}
 		
-		function login(){
-			console.log("Entered login function.");
-			// this code is to collect the form in the required format using Jquery
-			var obj_to_send = {
-				email : $("#Email").val(),
-				password : $("#Password").val()				
-			}
-			console.log(obj_to_send);
-			
-			var url = ""; //write the url to post login form data in JSON format.
-			/*$.post(url, obj_to_send, function(result){
-				//check for call success after posting the data
-			});*/
-			
-			
-		}
+/********************************************************************************************************************************/
+
+/**  Pin code 
+  *
+  */
+		$('#demo').pincodeInput({
+
+		  // 4 input boxes = code of 4 digits long
+		  inputs:4,        
+
+		  // hide digits like password input             
+		  hideDigits:true,   
+
+		  // keyDown callback             
+		  keydown : function(e){},
+
+		  // callback when all inputs are filled in (keyup event)
+		  complete : function(value, e, errorElement){
+			  
+			  	var url = "otp_check.php"; //write the get pattern url
+				var email = $("#Email").val();
+				console.log(email);
+				$.post(url, { otpCode : value, user_email : email }, function(response,status){
+
+					$("#myModalPin").modal("hide");
+					$('#demo').pincodeInput().data('plugin_pincodeInput').clear();
+					console.log(value);
+					console.log(email);
+					if(response == "true")
+					{
+						window.location = <?php echo "\"/app-v/services.php\""?>;
+					}
+					else
+						window.alert(response);
+
+					$("#signup-form")[0].reset();
+					
+				});
+		  }
+		  
+		});
+		
+		// To resize input box and add padding
+		var muiltis = $("#multi-input input:not(#demo)");
+		muiltis.each(function(){
+			$(this).attr("style","width:35px; margin:10px");
+		});
+
+
+		
+	
+		
   </script>
   <script type="text/javascript">
 

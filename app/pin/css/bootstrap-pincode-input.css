@@ -1,0 +1,28 @@
+.pincode-input-container1 {
+	display:inline-block;
+}
+.pincode-input-container1 input.first1 {
+	border-top-right-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.pincode-input-container1 input.last1 {
+	border-top-left-radius:0px;
+	border-bottom-left-radius:0px;
+	border-left-width:0px;
+}
+.pincode-input-container1 input.mid1 {
+	border-radius:0px;
+	border-left-width:0px;
+}
+.pincode-input-text1, .form-control1.pincode-input-text1 {
+	width:35px;
+	float:left;
+}
+.pincode-input-text1.mobile1{
+	width:100px;
+	border-left-width:1px !important;
+}
+
+.pincode-input-error1{
+	clear:both;
+}
