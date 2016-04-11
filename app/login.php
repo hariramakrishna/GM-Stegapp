@@ -434,7 +434,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           		<div class="control-group">
           	      <div class="controls">
           	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Log Ini</button>
-				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i>Pattern</button>
+				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br>
+				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>
           	  </div>	    
@@ -475,8 +476,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 							  <h4 class="modal-title">Key-in your OTP </h4>
 							</div>
 							<div class="modal-body" id="multi-input" style="background-color:#337AB7">
-								<input type="text" id="demo">
-						  
+								<input type="text" id="demo">						  
 							</div>
 							<div class="modal-footer">
 							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -485,6 +485,27 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 						  
 						</div>
 					</div>
+					
+					<!-- Graphical User Authentication Modal -->
+					<div class="modal fade" id="myModalGua" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Identify your clicks</h4>
+							</div>
+							<div class="modal-body" id="pointer_div" onclick="point_it(event)" style = "background-image:url('img/pic3.jpg');width:500px;height:111px;">
+								
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						  </div>
+						  
+						</div>
+					</div>					
       
           	  </form>
       	  
@@ -549,6 +570,9 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
    
 		$(document).ready(function(){ // run's on each page load
 			
+			/**  Pattern check
+			  *
+			  */
 			// Validate form fields and open modal for pattern			
 			$("#pattern-button").click(function(){
 				if($("#Email").val())
@@ -586,9 +610,25 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 				else
 					window.alert("Enter you email id");
 			});
+			
+			
+			/**  GUA check
+			  *
+			  */
+			// Validate form fields and open modal for GUA			
+			$("#gua").click(function(){
+				if($("#Email").val())
+				{
+					$("#myModalGua").modal("show");
+				}
+				else
+					window.alert("Enter you email id");
+			});			
 
 		});
-   
+
+
+		
 		var lock = new PatternLock('#patternHolder1',{
 			onDraw:function(pattern){
 				checkPattern(pattern);
@@ -673,6 +713,21 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 			$(this).attr("style","width:35px; margin:10px");
 		});
 
+/********************************************************************************************************************************/
+/**  GUA: gets the click co-ordinates 
+  *
+  */
+		function point_it(event){
+			var x=10; var y=10;
+			pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+			pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+
+			if(pos_x >= x-5 && pos_x <= x+5 && pos_y >= y-5 && pos_y <= y+5)
+			{
+				console.log(pos_x); console.log(pos_y);
+			}
+		}		
+		
 
 		
 	
