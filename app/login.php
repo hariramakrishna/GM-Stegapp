@@ -433,7 +433,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           
           		<div class="control-group">
           	      <div class="controls">
-          	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Log Ini</button>
+          	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Get OTP</button>
 				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br>
 				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
           	      </div>
@@ -496,8 +496,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
 							  <h4 class="modal-title">Identify your clicks</h4>
 							</div>
-							<div class="modal-body" id="pointer_div" onclick="point_it(event)" style = "background-image:url('img/pic3.jpg');width:500px;height:111px;">
-								
+							<div class="modal-body" >
+								<img src="" id="pointer_div" onclick="point_it(event)" style = "width:530px;height:226px;">
 							</div>
 							<div class="modal-footer">
 							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -568,7 +568,10 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	<script type="text/javascript" src="pin/js/bootstrap-pincode-input.js"></script>
    <script>
    
+		var guaImageStyle = '';
 		$(document).ready(function(){ // run's on each page load
+			
+
 			
 			/**  Pattern check
 			  *
@@ -615,11 +618,33 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 			/**  GUA check
 			  *
 			  */
+			  
+			var GUAImg = "";  	/// GUA: to store the img name retreived from DB
+			var x=0,y=0;		/// GUA: to store the x, y coordinates retreived from DB
+			
 			// Validate form fields and open modal for GUA			
 			$("#gua").click(function(){
 				if($("#Email").val())
 				{
-					$("#myModalGua").modal("show");
+					// Ajax call to get the image and coordinates from DB.
+					var url = "showGuaImage.php";
+					var email = $("#Email").val();
+					console.log(email);
+					
+					// post call to get the image from db for the given email
+					$.post(url, { user_email : email }, function(response,status){
+						//console.log("res: "+ response);
+						//gets the image as a base64 string in to response.
+						if(response != "false")
+						{
+							$("#myModalGua").modal("show");
+							
+							$("#pointer_div").attr('src','data:image/jpg;base64,' + response);
+						}
+						else
+							window.alert(response+"failed...Try again or contach Admin");
+					});	
+
 				}
 				else
 					window.alert("Enter you email id");
@@ -627,8 +652,10 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 
 		});
 
-
-		
+/**************************************************************************************************************/
+/**  Pattern Lock
+  *
+  */		
 		var lock = new PatternLock('#patternHolder1',{
 			onDraw:function(pattern){
 				checkPattern(pattern);
@@ -717,18 +744,90 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 /**  GUA: gets the click co-ordinates 
   *
   */
+		var cnt = 0;// to keep track of no.of clicks on the image
+		var clickXY = ""; // to store all x,y values for 3 clicks.
 		function point_it(event){
-			var x=10; var y=10;
+			//check if user is clicking more than 3 times.
+			if(cnt == 3)
+			{
+				cnt = 0;
+				clickXY = "";
+				window.alert("You had reached maximum attempts....");
+				window.location = <?php echo "\"/app-v/login.php\""?>;
+			}
+			
+			
+			cnt++; // increment on each click
+			//console.log("clicked");
+			//var x=10; var y=10;
 			pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
 			pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
-
-			if(pos_x >= x-5 && pos_x <= x+5 && pos_y >= y-5 && pos_y <= y+5)
+			
+			clickXY = clickXY + pos_x + ":" + pos_y + ";";
+			console.log("clicked "+clickXY);
+			
+			if(cnt == 3)
 			{
-				console.log(pos_x); console.log(pos_y);
-			}
-		}		
-		
+				var url = "get_GUA_xy.php"; //write the get pattern url
+				var email = $("#Email").val();
+				$.post(url, { user_email : email }, function(response,status){
+					if(response != "false")
+					{
+						console.log("response "+response);
+						//response has full string of xy's from DB. x1:y1;x2:y2;x3:y3;
+						if(compareXY(clickXY, response))
+						{
+							//This post is specific to setting the php session. Because i am not able to set that here in JS
+							var url = "set_session.php";
+							$.post(url, function(response,status){
+								if(response == "true")
+									window.location = <?php echo "\"/app-v/services.php\""?>;							
+							});
+						}
+						else
+							window.alert("you got it wrong...");
+					}
+					else
+						window.alert(response+" error in getting xy...");
 
+				});
+			}
+			
+		}
+
+		function compareXY(userXY, dbXY)
+		{
+			var a1,b1,a2,b2,a3,b3,x1,y1,x2,y2,x3,y3,temp1,temp2;
+			temp1 = userXY.split(";");
+				temp2 = temp1[0].split(":");  a1 = parseInt(temp2[0]); b1 = parseInt(temp2[1]);
+				temp2 = temp1[1].split(":");  a2 = parseInt(temp2[0]); b2 = parseInt(temp2[1]);
+				temp2 = temp1[2].split(":");  a3 = parseInt(temp2[0]); b3 = parseInt(temp2[1]);
+			
+			temp1 = dbXY.split(";");
+				temp2 = temp1[0].split(":");  x1 = parseInt(temp2[0]); y1 = parseInt(temp2[1]);
+				temp2 = temp1[1].split(":");  x2 = parseInt(temp2[0]); y2 = parseInt(temp2[1]);
+				temp2 = temp1[2].split(":");  x3 = parseInt(temp2[0]); y3 = parseInt(temp2[1]);
+		
+			if(a1 >= x1-10 && a1 <= x1+10 && b1 >= y1-10 && b1 <= y1+10)
+			{
+				if(a2 >= x2-10 && a2 <= x2+10 && b2 >= y2-10 && b2 <= y2+10)
+				{
+					if(a3 >= x3-10 && a3 <= x3+10 && b3 >= y3-10 && b3 <= y3+10)
+					{
+						return true;
+					}
+					else
+						return false;
+				}
+				else
+					return false;
+			}
+			else
+				return false;
+		
+		}
+		
+		//$("#pointer_div").attr("style","background-image:url('img/pic3.jpg');width:500px;height:111px;");
 		
 	
 		

@@ -6,3 +6,15 @@ use bhavana
 
 mysql> create table user (name varchar(50), email varchar(50), password varchar(
 50), otp integer, primary key (email));
+
+
+
+
+
+alter table user add column image varchar(100000);
+alter table user add column x1 varchar(3);
+alter table user add column y1 varchar(3);
+alter table user add column x2 varchar(3);
+alter table user add column y2 varchar(3);
+alter table user add column x3 varchar(3);
+alter table user add column y3 varchar(3);
