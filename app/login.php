@@ -785,7 +785,12 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 							});
 						}
 						else
+						{
+							cnt = 0;
+							clickXY = "";
 							window.alert("you got it wrong...");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}							
 					}
 					else
 						window.alert(response+" error in getting xy...");
