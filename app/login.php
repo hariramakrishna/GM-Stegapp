@@ -4,6 +4,11 @@
 
 include ('db.php');
 $pattern = "";
+	//to unset the session if came to login page
+	session_start();
+	session_unset();
+	session_destroy();
+	
 if (isset($_POST['formsubmitted']))
 {
     // Initialize a session:
@@ -568,7 +573,6 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	<script type="text/javascript" src="pin/js/bootstrap-pincode-input.js"></script>
    <script>
    
-		var guaImageStyle = '';
 		$(document).ready(function(){ // run's on each page load
 			
 
@@ -635,14 +639,23 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 					$.post(url, { user_email : email }, function(response,status){
 						//console.log("res: "+ response);
 						//gets the image as a base64 string in to response.
-						if(response != "false")
+
+						if(response == "nill")
+						{
+							window.alert(response+" No image associated with your account.");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
+						else if(response != "false" || response != "nill")
 						{
 							$("#myModalGua").modal("show");
 							
 							$("#pointer_div").attr('src','data:image/jpg;base64,' + response);
 						}
 						else
+						{
 							window.alert(response+"failed...Try again or contach Admin");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
 					});	
 
 				}
@@ -785,7 +798,12 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 							});
 						}
 						else
-							window.alert("you got it wrong...");
+						{
+							cnt = 0;
+							clickXY = "";
+							window.alert("you got it wrong...try again...");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
 					}
 					else
 						window.alert(response+" error in getting xy...");
@@ -832,13 +850,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	
 		
   </script>
-  <script type="text/javascript">
 
-						$("#mainButton").click(function(){
-								$( "#button2" ).click();
-								console.log("i am In");
-								});
-				</script>
     </body>
 
 <!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->
