@@ -30,6 +30,7 @@ if($_POST["otpCode"] && $_POST["user_email"])
 		{
 			session_start();
 			$_SESSION['EXPIRES'] = time();
+			$_SESSION['email'] = $emailUser;
 			echo "true";
 		}
 		else

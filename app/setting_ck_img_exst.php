@@ -1,12 +1,8 @@
-<?php
+<?php//checks if image exists or not for a given email
 include ('db.php');
 
-if($_POST["user_email"])
-{
-	$emailUser = $_POST["user_email"];
-	//setting email in session when logged in thriught GUA
 	session_start();
-	$_SESSION['email'] = $emailUser;
+	$emailUser = $_SESSION['email'];
 
     $result = mysqli_query($dbc,"SELECT * FROM user WHERE email='$emailUser'");
     while($row = mysqli_fetch_assoc($result))
@@ -23,11 +19,5 @@ if($_POST["user_email"])
 	}
 	else
 		echo "nill";
-
-}
-else
-{
-    echo "false";
-}
 
 ?>

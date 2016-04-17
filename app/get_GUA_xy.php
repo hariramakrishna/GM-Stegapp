@@ -28,6 +28,8 @@ if($_POST["user_email"])
 		$x3 = $temp["x3"];
 		$y3 = $temp["y3"];		
 		
+		$_SESSION['email'] = $emailUser;
+		
 		echo $x1 .":". $y1 .";". $x2 .":". $y2 .";". $x3 .":". $y3 .";";
 		
 /* 		if( $otpCode == $otp )

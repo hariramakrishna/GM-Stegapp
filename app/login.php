@@ -4,6 +4,11 @@
 
 include ('db.php');
 $pattern = "";
+	//to unset the session if came to login page
+	session_start();
+	session_unset();
+	session_destroy();
+	
 if (isset($_POST['formsubmitted']))
 {
     // Initialize a session:
@@ -232,11 +237,11 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
  .success {
 	border: 1px solid;
 	margin: 0 auto;
-	padding:10px 50px 10px 60px;
+	padding:20px 50px 10px 500px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
     
-     width:450px;
+     width:100%;
      color: #4F8A10;
 	background-color: #DFF2BF;
 	background-image:url('images/success.png');
@@ -252,7 +257,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	background-repeat: no-repeat;
 	background-position: 10px center;
 
-     width:450px;
+     width:100%;
     	color: #D8000C;
 	background-color: #FFBABA;
 	background-image: url('images/error.png');
@@ -307,7 +312,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 				mysqli_query($dbc,"UPDATE user SET status='1' WHERE activation='$key'");
 				//$msg="Your account is activated";	
 				
-				print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn css!";
+				print "<br/> <br/> <br/> <br/>";
 				echo '<div class="success">Your account is now active. You may now <a href="login.php">Log in</a></div>';
 				//echo '<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"><div class="modal-dialog modal-lg"><div class="modal-content">congrats</div></div></div>';
 			}
@@ -403,14 +408,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           
             <div class="col-sm-6 col-sm-offset-3 text-center signup">
               <h3>Log In</h3><br />
-              
-              <ul class="list-inline social-icons-signup">
-      					 <li><a class="twitter" href="#" target="_blank"><i class="fa fa-twitter fa-3x"></i></a></li>
-      					 <li><a class="facebook" href="#" target="_blank"><i class="fa fa-facebook fa-3x"></i></a></li>
-      					 <li><a class="google" href="#" target="_blank"><i class="fa fa-google-plus fa-3x"></i></a></li>
-    					 </ul>
-    					 
-    					 <p>------------ OR -------------</p>
+
               
               <form id="signup-form" class="form-horizontal">
           		<div class="control-group">
@@ -434,10 +432,10 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           		<div class="control-group">
           	      <div class="controls">
           	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Get OTP</button>
-				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br>
+				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br></br>
 				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
           	      </div>
-          	      <a class="small-message" href="#"><small>Need An Account?</small></a>
+          	      <a class="small-message" href="signup.php"><small>Need An Account?</small></a>
           	  </div>	    
 			  
 			  
@@ -568,7 +566,6 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	<script type="text/javascript" src="pin/js/bootstrap-pincode-input.js"></script>
    <script>
    
-		var guaImageStyle = '';
 		$(document).ready(function(){ // run's on each page load
 			
 
@@ -635,14 +632,23 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 					$.post(url, { user_email : email }, function(response,status){
 						//console.log("res: "+ response);
 						//gets the image as a base64 string in to response.
-						if(response != "false")
+
+						if(response == "nill")
+						{
+							window.alert(response+" No image associated with your account.");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
+						else if(response != "false" || response != "nill")
 						{
 							$("#myModalGua").modal("show");
 							
 							$("#pointer_div").attr('src','data:image/jpg;base64,' + response);
 						}
 						else
+						{
 							window.alert(response+"failed...Try again or contach Admin");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
 					});	
 
 				}
@@ -788,9 +794,9 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 						{
 							cnt = 0;
 							clickXY = "";
-							window.alert("you got it wrong...");
+							window.alert("you got it wrong...try again...");
 							window.location = <?php echo "\"/app-v/login.php\""?>;
-						}							
+						}
 					}
 					else
 						window.alert(response+" error in getting xy...");
@@ -837,13 +843,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	
 		
   </script>
-  <script type="text/javascript">
 
-						$("#mainButton").click(function(){
-								$( "#button2" ).click();
-								console.log("i am In");
-								});
-				</script>
     </body>
 
 <!-- Mirrored from themearmada.com/demos/lava/1.5/bootstrap3/multipage/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Feb 2016 16:52:19 GMT -->
