@@ -6,9 +6,7 @@
 <html>
 <head>
 <style>
-body {
-bacground-color: "blue";
-}
+
 
 form {
 background-color:#FFF;
@@ -17,8 +15,8 @@ padding : 10px;
 }
 </style>
 </head>
-<center><H1>Uploading Images in Mysql Database</H1></center>
-    <body bgcolor="skyblue">
+    <body bgcolor="#337AB7">
+	<br><br>
         <form method="post" enctype="multipart/form-data">
         <br/>
            <input type="file" name="image" />
@@ -46,12 +44,14 @@ padding : 10px;
 		    saveimage($image);
                 }
             }
-
+            //displayimage();
             function saveimage($image)
             {
 				include ('db.php');
+				session_start();
+
 				
-				$emailUser = 'gg';
+				$emailUser = $_SESSION['email'];
 				$query_check_credentials = "UPDATE user set image = '$image' WHERE (email='$emailUser') AND status='1'";
 
 				$result_check_credentials = mysqli_query($dbc, $query_check_credentials);
@@ -61,7 +61,11 @@ padding : 10px;
 				}
 				else
 				{
-					echo 'Query passed ';
+					//when new image is uploaded, empty the xy values. As user need to add new clicks for new image
+					$query_check_credentials = "UPDATE user set x1 = '', y1 = '', x2 = '', y2 = '', x3 = '', y3 = '' WHERE (email='$emailUser') AND status='1'";
+					$result_check_credentials = mysqli_query($dbc, $query_check_credentials);
+					if($result_check_credentials)//If the QUery Failed 
+						echo 'Query passed ';
 				}
             }
         ?>

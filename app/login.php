@@ -439,7 +439,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           		<div class="control-group">
           	      <div class="controls">
           	       <button id="pin" type="button" class="btn-main" ><i class="fa fa-sign-in"></i> Get OTP</button>
-				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br>
+				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br></br>
 				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
           	      </div>
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>

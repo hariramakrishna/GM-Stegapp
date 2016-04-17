@@ -107,10 +107,12 @@ echo "endedd";
 		  </br>
 		  <div class="control-group">
           	      <div class="controls">
-				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern Lock</button></br>
-				   </br>
-				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
+						<button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern Lock</button></br>
+						</br>
+						<button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
+						<button id="upload" type="button" class="btn-main"><i class="fa fa-object-group"></i> Uplaod</button>
           	      </div>
+				  
           	      <a class="small-message" href="#"><small>Need An Account?</small></a>
           </div>
         </div>
@@ -156,7 +158,35 @@ echo "endedd";
 						  </div>
 						  
 						</div>
-					</div>	
+					</div>
+					
+
+
+					<!-- Image upload -->
+					<div class="modal fade" id="myModalUpload" role="dialog">
+						<div class="modal-dialog">
+						
+						  <!-- Modal content-->
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Upload an image <i>(approx resolution. 500x250)</h4>
+							</div>
+							<div class="modal-body">
+								<iframe src="uploadimages.php" style="height:200px;width:100%;border:none;overflow:hidden;">
+								  <p>Your browser does not support iframes.</p>
+								</iframe>
+							  
+							</div>
+							<div class="modal-footer">
+							  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						  </div>
+						  
+						</div>
+					</div>
+
+					
         
       </div>
     </section>
@@ -190,7 +220,8 @@ echo "endedd";
         
       </div>
     </section>
-    
+	
+	
     
     <section id="footer">
       <div class="container">
@@ -201,6 +232,10 @@ echo "endedd";
         </div>
       </div>
     </section>
+	
+	
+	
+
       
     
     <!-- Javascript
@@ -218,7 +253,7 @@ echo "endedd";
 			/**  Pattern lock Modal
 			  *
 			  */
-			// Validate form fields and open modal for pattern			
+			// Validate form fields and open modal for pattern
 			$("#pattern-button").click(function(){
 				$("#myModal").modal("show");
 			});
@@ -266,7 +301,16 @@ echo "endedd";
 					}
 				});	
 
-			});						
+			});
+			
+			
+			/**  upload new image
+			  *
+			  */
+			// Validate form fields and open modal for pattern			
+			$("#upload").click(function(){
+				$("#myModalUpload").modal("show");
+			});
 
 			
 			
