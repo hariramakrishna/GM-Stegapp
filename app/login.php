@@ -319,6 +319,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 			else
 			{
 				//$msg ="Your account is already active, no need to activate again";
+				print "<br/> <br/> <br/> <br/>";
 				echo '<div class="errormsgbox">Your account is already active, no need to activate again...!You may now <a href="login.php">Log in</a></div>';
 			}
 
@@ -326,6 +327,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 		else
 		{
 			//$msg ="Wrong activation code.";
+			print "<br/> <br/> <br/> <br/>";
 			echo '<div class="errormsgbox">Oops !Your account could not be activated. Please recheck the link or contact the system administrator.</div>';
 		}
 		

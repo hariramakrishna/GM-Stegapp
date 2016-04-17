@@ -78,6 +78,7 @@ if (isset($_POST['formsubmitted'])) {
 
 
                 // Finish the page:
+				print "<br/> <br/> <br/> <br/>";
                 echo '<div class="success">Thank you for
 registering! A confirmation email
 has been sent to '.$Email.' Please click on the Activation Link to Activate your account </div>';
