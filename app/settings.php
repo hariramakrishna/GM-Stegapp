@@ -8,7 +8,7 @@ $password = "hg7180";//"hg7180";
 $dbname = "hgurram"; */
 
 	    session_start();echo "started";
-	if (!isset($_SESSION['EXPIRES']) || $_SESSION['EXPIRES'] < time()-10) {echo "in a if cond";
+	if (!isset($_SESSION['EXPIRES']) || $_SESSION['EXPIRES'] < time()-40) {echo "in a if cond";
 		session_unset();
 		session_destroy();
 		$_SESSION = array();
@@ -248,6 +248,7 @@ echo "endedd";
 	<script src="patternLock/patternLock.js"></script>
 	
 	<script>
+	var idleTime = 0;// to find page inactivity
 		$(document).ready(function(){ // run's on each page load
 		
 			/**  Pattern lock Modal
@@ -313,6 +314,41 @@ echo "endedd";
 			});
 
 			
+	/**************************************************************************************************************/			
+	/**  Mapage inactivity finder
+	  *
+	  */			
+			//Increment the idle time counter every minute.
+			idleInterval = setInterval(timerIncrement, 10000); // 10 seconds
+
+			//Zero the idle timer on mouse movement.
+			$('body').mousemove(function (e) {
+			 //alert("mouse moved" + idleTime);
+			 idleTime = 0;
+			});
+
+			$('body').keypress(function (e) {
+			  //alert("keypressed"  + idleTime);
+				idleTime = 0;
+			});
+
+
+
+			$('body').click(function() {
+			  //alert("mouse moved" + idleTime);
+			   idleTime = 0;
+			});
+
+
+			function timerIncrement() {
+				idleTime = idleTime + 10;//adding 10 seconds
+				console.log("time: "+ idleTime);
+				if (idleTime > 40) { // 10 minutes
+
+					window.location = <?php echo "\"/app-v/login.php\""?>;
+				}
+			}
+				
 			
 		});
 		

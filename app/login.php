@@ -567,7 +567,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	<script src="patternLock/patternLock.js"></script>
 	<script type="text/javascript" src="pin/js/bootstrap-pincode-input.js"></script>
    <script>
-   
+		var idleTime = 0; // to find page inactivity
 		$(document).ready(function(){ // run's on each page load
 			
 
@@ -658,6 +658,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 					window.alert("Enter you email id");
 			});			
 
+			
 		});
 
 /**************************************************************************************************************/
