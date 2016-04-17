@@ -11,8 +11,8 @@ $mail->Host       = "smtp.mandrillapp.com"; // Mandrillapp.com SES server, note 
 $mail->Port       =  587;                    // set the SMTP port
 $mail->Username   = "g.hariramakrishna@yahoo.com";  // SMTP  username
 $mail->Password   = "IoO9J1uH1MvKHp9wjEsJdQ";  // SMTP password
-$mail->SetFrom($from, 'Harry\'s GuestBook');
-$mail->AddReplyTo($from,'Harry\'s GuestBook');
+$mail->SetFrom($from, 'Team StegApp');
+$mail->AddReplyTo($from,'Team StegApp');
 $mail->Subject    = $subject;
 $mail->MsgHTML($body);
 $address = $to;

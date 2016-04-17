@@ -237,11 +237,11 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
  .success {
 	border: 1px solid;
 	margin: 0 auto;
-	padding:10px 50px 10px 60px;
+	padding:20px 50px 10px 500px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
     
-     width:450px;
+     width:100%;
      color: #4F8A10;
 	background-color: #DFF2BF;
 	background-image:url('images/success.png');
@@ -257,7 +257,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 	background-repeat: no-repeat;
 	background-position: 10px center;
 
-     width:450px;
+     width:100%;
     	color: #D8000C;
 	background-color: #FFBABA;
 	background-image: url('images/error.png');
@@ -312,7 +312,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 				mysqli_query($dbc,"UPDATE user SET status='1' WHERE activation='$key'");
 				//$msg="Your account is activated";	
 				
-				print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn css!";
+				print "<br/> <br/> <br/> <br/>";
 				echo '<div class="success">Your account is now active. You may now <a href="login.php">Log in</a></div>';
 				//echo '<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"><div class="modal-dialog modal-lg"><div class="modal-content">congrats</div></div></div>';
 			}
@@ -408,14 +408,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           
             <div class="col-sm-6 col-sm-offset-3 text-center signup">
               <h3>Log In</h3><br />
-              
-              <ul class="list-inline social-icons-signup">
-      					 <li><a class="twitter" href="#" target="_blank"><i class="fa fa-twitter fa-3x"></i></a></li>
-      					 <li><a class="facebook" href="#" target="_blank"><i class="fa fa-facebook fa-3x"></i></a></li>
-      					 <li><a class="google" href="#" target="_blank"><i class="fa fa-google-plus fa-3x"></i></a></li>
-    					 </ul>
-    					 
-    					 <p>------------ OR -------------</p>
+
               
               <form id="signup-form" class="form-horizontal">
           		<div class="control-group">
@@ -442,7 +435,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 				   <button id="pattern-button" type="button" class="btn-main"><i class="fa fa-spinner"></i> Pattern</button></br></br>
 				   <button id="gua" type="button" class="btn-main"><i class="fa fa-object-group"></i> Graphical User Authentication</button>
           	      </div>
-          	      <a class="small-message" href="#"><small>Need An Account?</small></a>
+          	      <a class="small-message" href="signup.php"><small>Need An Account?</small></a>
           	  </div>	    
 			  
 			  

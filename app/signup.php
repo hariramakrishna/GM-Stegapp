@@ -27,10 +27,10 @@ if (isset($_POST['formsubmitted'])) {
     }
 
 
-    if (empty($_POST['Password'])) {
-        $error[] = 'Please Enter Your Password ';
+    if (empty($_POST['mobile'])) {
+        $error[] = 'Please Enter Your mobile ';
     } else {
-        $Password = $_POST['Password'];
+        $mobile = $_POST['mobile'];
     }
 
 
@@ -52,7 +52,7 @@ if (isset($_POST['formsubmitted'])) {
             $activation = md5(uniqid(rand(), true));
 
 
-            $query_insert_user = "INSERT INTO user ( name, email, password, activation) VALUES ( '$name', '$Email', '$Password', '$activation')";
+            $query_insert_user = "INSERT INTO user ( name, email, mobile, activation) VALUES ( '$name', '$Email', '$mobile', '$activation')";
 
 
             $result_insert_user = mysqli_query($dbc, $query_insert_user);
@@ -70,8 +70,8 @@ if (isset($_POST['formsubmitted'])) {
 				
 				include 'smtp/Send_Mail.php';
 				$to=$Email;
-				$subject="Confirm Registration";
-				$body='<i>Dear</i> '.$name.', <br/> <br/> Thank You for Registering for <b>Harry\'s GuestBook</b>. Please verify your email and get started using your Website account. <br/> <br/> <a href="'.$base_url.'/login.php?key='.$activation.'">'.$base_url.'/signup.php?key='.$activation.'</a><br/> <br/>Thanks & Regards,<br/><b><i>-Harry</i></b>';
+				$subject="Confirm your Registration with StegApp";
+				$body='<i>Dear</i> '.$name.', <br/> <br/> Thank You for Registering with our <b>StegApp</b>.<br/>Please verify your email and get started using your account. <br/> <br/> <a href="'.$base_url.'/login.php?key='.$activation.'">'.$base_url.'/login.php?key='.$activation.'</a><br/> <br/>Thanks & Regards,<br/><b><i>-Team StegApp</i></b>';
 				Send_Mail($to,$subject,$body);
 
                 // Flush the buffered output.
@@ -90,6 +90,7 @@ inconvenience.</div>';
             }
 
         } else { // The email address is not available.
+			print "<br/> <br/> <br/> <br/>";
             echo '<div class="errormsgbox" >That email
 address has already been registered.
 </div>';
@@ -145,6 +146,46 @@ echo '<div class="errormsgbox"> <ol>';
   <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../../apple-touch-icon-72-precomposed.png">
   <link rel="apple-touch-icon-precomposed" href="../../../../../apple-touch-icon-57-precomposed.png">
   <link rel="shortcut icon" href="../../../../../favicon.html">
+
+  
+<style type="text/css">
+ .success {
+	border: 1px solid;
+	margin: 0 auto;
+	padding:30px 5px 10px 60px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+    
+     width:100%;
+     color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('images/success.png');
+     
+}
+
+
+
+ .errormsgbox {
+	border: 1px solid;
+	margin: 0 auto;
+	padding:30px 5px 10px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+
+     width:100%;
+    	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('images/error.png');
+     
+}
+
+
+</style>
+
+
+  
+  
+  
 </head>
 
 <body>
@@ -201,13 +242,6 @@ echo '<div class="errormsgbox"> <ol>';
             <div class="col-sm-6 col-sm-offset-3 text-center signup">
               <h3>Sign Up</h3><br />
               
-              <ul class="list-inline social-icons-signup">
-      					 <li><a class="twitter" href="#" target="_blank"><i class="fa fa-twitter fa-3x"></i></a></li>
-      					 <li><a class="facebook" href="#" target="_blank"><i class="fa fa-facebook fa-3x"></i></a></li>
-      					 <li><a class="google" href="#" target="_blank"><i class="fa fa-google-plus fa-3x"></i></a></li>
-    					 </ul>
-    					 
-    					 <p>------------ OR -------------</p>
               
               <form id="signup-form" class="form-horizontal" method="post" action="#">
           		<div class="control-group">
@@ -223,7 +257,7 @@ echo '<div class="errormsgbox"> <ol>';
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-envelope"></i></span>
-          					<input type="text" id="Email" name="Email" placeholder="Email">
+          					<input type="text" id="Email" name="Email" placeholder="Email" required>
           				</div>
           			</div>
           		</div>
@@ -232,7 +266,7 @@ echo '<div class="errormsgbox"> <ol>';
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-lock"></i></span>
-          					<input type="Password" id="Password" name="Password" placeholder="Password" data-error="Before you wreck yourself" required>
+          					<input type="number" id="mobile" name="mobile" placeholder="Mobile" data-error="Before you wreck yourself" required>
           				</div>
           			</div>
           		</div>
@@ -241,7 +275,7 @@ echo '<div class="errormsgbox"> <ol>';
           	      <div class="controls">
           	       <button type="submit" class="btn-main" name="formsubmitted"><i class="fa fa-user"></i> Create My Account</button>
           	      </div>
-          	      <a class="small-message" href="#"><small>Already Registered?</small></a>
+          	      <a class="small-message" href="login.php"><small>Already Registered?</small></a>
           	  </div>
       
           	  </form>
