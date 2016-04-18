@@ -364,29 +364,14 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           <ul class="nav navbar-nav navbar-right">
             <li><a href="index.html">Home</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages &amp; Features <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Features <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="full-width.html">Full Width</a></li>
-                  <li><a href="services.html">Services</a></li>
+                  <li><a href="services.php">Services</a></li>
                   <li><a href="about.html">About</a></li>
-                  <li><a href="team.html">Team</a></li>
-                  <li><a href="pricing.html">Pricing</a></li>
-                  <li><a href="blog.html">Blog Loop</a></li>
-                  <li><a href="blog-article.html">Blog Article</a></li>
-                  <li><a href="login.html">Log In</a></li>
-                  <li><a href="signup.html">Sign Up</a></li>
-                  <li><a href="icons.html">Icons</a></li>
+                  <li><a href="login.php">Log In</a></li>
+                  <li><a href="signup.php">Sign Up</a></li>
                 </ul>
               </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="3-column.html">3 Column</a></li>
-                  <li><a href="4-column.html">4 Column</a></li>
-                  <li><a href="individual-work.html">Individual Work</a></li>
-                </ul>
-              </li>
-              <li><a href="blog.html">Blog</a></li>
               <li><a href="contact.html">Contact</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
