@@ -17,3 +17,22 @@ alter table user add column x2 varchar(3);
 alter table user add column y2 varchar(3);
 alter table user add column x3 varchar(3);
 alter table user add column y3 varchar(3);
+
+
+
+Bhavana's DB:
+putty to cs.uml.edu.
+user: bmaradan
+pass: nahXesh5
+
+>>ssh weblab.cs.uml.edu
+pass: nahXesh5
+
+ >>mysql -h localhost -u bmaradan -p
+ Pass: bm7051
+ 
+
+ 
+ 
+
+
