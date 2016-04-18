@@ -293,7 +293,6 @@ echo "endedd";
 			/**  upload new image
 			  *
 			  */
-			// Validate form fields and open modal for pattern			
 			$("#upload").click(function(){
 				$("#myModalUpload").modal("show");
 			});
@@ -345,7 +344,7 @@ echo "endedd";
 			onDraw:function(pattern){
 				var url = "set_pattern.php";
 				$.post(url, { patternCode : pattern }, function(response,status){
-					window.alert("from set "+response);
+					//window.alert("from set "+response);
 						if(response == "true")
 						{
 							window.alert("Pattern updated succesfully...");

@@ -57,7 +57,7 @@ padding : 10px;
 				$result_check_credentials = mysqli_query($dbc, $query_check_credentials);
 				if(!$result_check_credentials)//If the QUery Failed 
 				{
-					echo 'Query Failed ';
+					echo 'Upload Failed ';
 				}
 				else
 				{
@@ -65,7 +65,7 @@ padding : 10px;
 					$query_check_credentials = "UPDATE user set x1 = '', y1 = '', x2 = '', y2 = '', x3 = '', y3 = '' WHERE (email='$emailUser') AND status='1'";
 					$result_check_credentials = mysqli_query($dbc, $query_check_credentials);
 					if($result_check_credentials)//If the QUery Failed 
-						echo 'Query passed ';
+						echo 'Upload Succeded ';
 				}
             }
         ?>

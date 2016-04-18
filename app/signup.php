@@ -213,7 +213,7 @@ echo '<div class="errormsgbox"> <ol>';
                   <li><a href="signup.php">Sign Up</a></li>
                 </ul>
               </li>
-s              <li><a href="contact.html">Contact</a></li>
+              <li><a href="contact.html">Contact</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
