@@ -196,17 +196,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 
 <head>
   <meta charset="utf-8">
-  <title>Lava | Designed By Theme Armada</title>
-  <meta name="keywords" content="made with bootstrap, wrap bootstrap themes, bootstrap agency themes, creative bootstrap sites, Lava theme, responsive bootstrap theme, mobile website themes, bootstrap portfolio, theme armada">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <title>Login | StegApp</title>
   
-  <meta property="og:title" content="Lava | Designed By Theme Armada">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="http://www.themearmada.com/demos/lava">
-	<meta property="og:site_name" content="Theme Armada">
-	<meta property="og:description" content="made with bootstrap, wrap bootstrap themes, bootstrap agency themes, creative bootstrap sites, Lava theme, responsive bootstrap theme, mobile website themes, bootstrap portfolio, theme armada">
-
   <!-- Styles -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/animate.css">
@@ -422,14 +413,14 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
           			</div>
           		</div>
           		          		          		
-          		<div class="control-group">
+          		<!--<div class="control-group">
           			<div class="controls">
           			    <div class="input-prepend">
           				<span class="add-on"><i class="fa fa-lock"></i></span>
           					<input type="Password" id="Password" class="input-xlarge" name="Password" placeholder="Password">
           				</div>
           			</div>
-          		</div>
+          		</div>-->
           
           		<div class="control-group">
           	      <div class="controls">
@@ -521,7 +512,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
       <div class="container">
         <div class="row margin-40">
           <div class="col-sm-10 col-sm-offset-1 text-center">
-            <p>1234 Main Street Atlanta, GA 30305 | 404.555.5555  |  <a href="mailto:support@themearmada.com"><i class="icon-envelope-alt"></i> support@themearmada.com</a></p>
+            <p> 198 Riverside St, Lowell, MA 01854 | 816.745.9286  |  <a href="mailto:hariramakrishna_gurram@student.uml.edu"><i class="icon-envelope-alt"></i> HariRamaKrishna_Gurram@student.uml.edu</a></p>
             <hr>
           </div>
         </div>
@@ -549,7 +540,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Theme Armada.</a></p>
+            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Hari Rama Krishna Gurram</a></p>
           </div>
         </div>
       </div>
@@ -634,8 +625,18 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 					$.post(url, { user_email : email }, function(response,status){
 						//console.log("res: "+ response);
 						//gets the image as a base64 string in to response.
-
-						if(response == "nill")
+						console.log("llll: "+response);
+						if(response == "no_xy")
+						{
+							window.alert("GUA not yet configured. use OTP or Pattern Lock");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}							
+						else if(response == "not_registered")
+						{
+							window.alert(" Invalid Email address. pls register...");
+							window.location = <?php echo "\"/app-v/login.php\""?>;
+						}
+						else if(response == "nill")
 						{
 							window.alert(response+" No image associated with your account.");
 							window.location = <?php echo "\"/app-v/login.php\""?>;

@@ -1,4 +1,5 @@
-<?php//checks if image exists or not for a given email
+<?php
+//checks if image exists or not for a given email
 include ('db.php');
 
 	session_start();

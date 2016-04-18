@@ -2,34 +2,33 @@
 <html lang='en'>
 <head>
     <link href='main.css' type='text/css' rel='stylesheet' />
-
+	
     <script src='sjcl.js' type='text/javascript'></script>
     <script src='main.js' type='text/javascript'></script>
-	
 </head>
 <body>
     
     </br>
 
     <div id='main' class='section dark'>
-        <div class='step'>Choose an image</div>
+        <div class='step'>Choose an imagea</div>
         <img id='preview' class='preview hide' />
         <div class='sectionbody'>
             <input type='file' id='file' />
         </div>
     </div>
     <div id='choose' class='section dark hide'>
-        <div class='step'>Steganalysis</div>
+        <div class='step'>What do you want to do?</div>
         <div class='sectionbody'>
             <div class='left'>
                 <textarea id='message' class='message' maxlength='1000'
                     placeholder='Type hidden message'></textarea>
-                <input type='password' id='password' class='password textb'
+                <input type='password' id='password' class='password'
                     placeholder='Password (optional)' />
-                <button id='encode' class='btn btn-primary submit'>Hide message</button>
+                <button id='encode' class='submit'>Hide message</button>
             </div>
             <div class='right'>
-                <input type='password' id='password2' class='password textb'
+                <input type='password' id='password2' class='password'
                     placeholder='Password' />
                 <button id='decode' class='submit'>Reveal message</button>
             </div>

@@ -52,7 +52,7 @@ if (isset($_POST['formsubmitted'])) {
             $activation = md5(uniqid(rand(), true));
 
 
-            $query_insert_user = "INSERT INTO user ( name, email, mobile, activation) VALUES ( '$name', '$Email', '$mobile', '$activation')";
+            $query_insert_user = "INSERT INTO user ( name, email, mobile, activation, image) VALUES ( '$name', '$Email', '$mobile', '$activation', 'no')";
 
 
             $result_insert_user = mysqli_query($dbc, $query_insert_user);
@@ -127,7 +127,7 @@ echo '<div class="errormsgbox"> <ol>';
 
 <head>
   <meta charset="utf-8">
-  <title>StegApp</title>
+  <title>SignUp | StegApp</title>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -293,7 +293,7 @@ echo '<div class="errormsgbox"> <ol>';
       <div class="container">
         <div class="row margin-40">
           <div class="col-sm-10 col-sm-offset-1 text-center">
-            <p>1234 Main Street Atlanta, GA 30305 | 404.555.5555  |  <a href="mailto:support@themearmada.com"><i class="icon-envelope-alt"></i> support@themearmada.com</a></p>
+            <p> 198 Riverside St, Lowell, MA 01854 | 816.745.9286  |  <a href="mailto:hariramakrishna_gurram@student.uml.edu"><i class="icon-envelope-alt"></i> HariRamaKrishna_Gurram@student.uml.edu</a></p>
             <hr>
           </div>
         </div>
@@ -321,7 +321,7 @@ echo '<div class="errormsgbox"> <ol>';
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Theme Armada.</a></p>
+            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Hari Rama Krishna Gurram</a></p>
           </div>
         </div>
       </div>

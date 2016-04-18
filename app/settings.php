@@ -113,7 +113,6 @@ echo "endedd";
 						<button id="upload" type="button" class="btn-main"><i class="fa fa-object-group"></i> Uplaod</button>
           	      </div>
 				  
-          	      <a class="small-message" href="#"><small>Need An Account?</small></a>
           </div>
         </div>
 		
@@ -147,7 +146,7 @@ echo "endedd";
 						  <div class="modal-content">
 							<div class="modal-header">
 							  <button type="button" class="close" data-dismiss="modal">&times;</button>
-							  <h4 class="modal-title">Identify your clicks</h4>
+							  <h4 class="modal-title">Identify your clicks: <small>  ( Record 3 places )</small></h4>
 							</div>
 							<div class="modal-body" >
 								<img src="" id="pointer_div" onclick="point_it(event)" style = "width:530px;height:226px;">
@@ -198,7 +197,7 @@ echo "endedd";
       <div class="container">
         <div class="row margin-40">
           <div class="col-sm-10 col-sm-offset-1 text-center">
-            <p>1234 Main Street Atlanta, GA 30305 | 404.555.5555  |  <a href="mailto:support@themearmada.com"><i class="icon-envelope-alt"></i> support@themearmada.com</a></p>
+            <p> 198 Riverside St, Lowell, MA 01854 | 816.745.9286  |  <a href="mailto:hariramakrishna_gurram@student.uml.edu"><i class="icon-envelope-alt"></i> HariRamaKrishna_Gurram@student.uml.edu</a></p>
             <hr>
           </div>
         </div>
@@ -220,14 +219,13 @@ echo "endedd";
         
       </div>
     </section>
-	
-	
+    
     
     <section id="footer">
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Theme Armada.</a></p>
+            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Hari Rama Krishna Gurram</a></p>
           </div>
         </div>
       </div>

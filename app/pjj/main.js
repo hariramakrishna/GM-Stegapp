@@ -81,7 +81,7 @@ var encode = function() {
     ctx.putImageData(imgData, 0, 0);
 
     // view the new image
-    //alert('Done! When the image appears, save and share it with someone.');
+    alert('Done! When the image appears, save and share it with someone.');
 
     output.src = canvas.toDataURL();
 

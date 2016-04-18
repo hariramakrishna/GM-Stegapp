@@ -29,7 +29,7 @@ echo "endedd";
 
 <head>
   <meta charset="utf-8">
-  <title>Lava | Designed By Theme Armada</title>
+  <title>Steganalysis | StegApp</title>
   
   <!-- Styles -->
   <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -290,39 +290,13 @@ echo "endedd";
       </div>
     </section>
     
-     <!--Twitter Feed-->
-<!--     <section id="twitter" class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <i class="fa fa-twitter fa-4x gray margin-20"></i>
-          </div>
-        </div>
-        
-        <div class="row">
-        
-          <div class="col-sm-6">
-            <blockquote class="twitter-tweet" lang="en"><p>Theme Armada New Website Launch <a href="http://t.co/YLbXUFhz5d">http://t.co/YLbXUFhz5d</a></p>&mdash; Theme Armada (@themearmada) <a href="https://twitter.com/themearmada/statuses/404968762446970880">November 25, 2013</a></blockquote>
-  <script async src="../../../../../../platform.twitter.com/widgets.js" charset="utf-8"></script>
-          </div>
-          
-          <div class="col-sm-6">
-            <blockquote class="twitter-tweet" lang="en"><p>Our sites up and CSSMania <a href="http://t.co/KKaKX75WrH">http://t.co/KKaKX75WrH</a> <a href="https://twitter.com/cssmania">@cssmania</a> - Give it a vote if you like it!</p>&mdash; Theme Armada (@themearmada) <a href="https://twitter.com/themearmada/statuses/403515461158961152">November 21, 2013</a></blockquote>
-  <script async src="../../../../../../platform.twitter.com/widgets.js" charset="utf-8"></script>
-          </div>
-          
-        </div>
-        
-      </div>
-    </section> -->
-
     
     <!--Bottom Section-->
     <section id="bottom">
       <div class="container">
         <div class="row margin-40">
           <div class="col-sm-10 col-sm-offset-1 text-center">
-            <p>1234 Main Street Atlanta, GA 30305 | 404.555.5555  |  <a href="mailto:support@themearmada.com"><i class="icon-envelope-alt"></i> support@themearmada.com</a></p>
+            <p> 198 Riverside St, Lowell, MA 01854 | 816.745.9286  |  <a href="mailto:hariramakrishna_gurram@student.uml.edu"><i class="icon-envelope-alt"></i> HariRamaKrishna_Gurram@student.uml.edu</a></p>
             <hr>
           </div>
         </div>
@@ -350,11 +324,11 @@ echo "endedd";
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
-            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Theme Armada.</a></p>
+            <p>@ Copyright. All Rights Reserved. Created by <a href="http://www.themearmada.com/">Hari Rama Krishna Gurram</a></p>
           </div>
         </div>
       </div>
-    </section>      
+    </section>    
     
     <!-- Javascript
     ================================================== -->
