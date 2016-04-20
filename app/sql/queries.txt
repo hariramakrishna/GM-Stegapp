@@ -4,7 +4,7 @@ create database bhavana
 
 use bhavana
 
-mysql> create table user (name varchar(50), email varchar(50), password varchar(50), otp varchar(4), activation varchar(50), status int default 0, pattern int, mobile varchar(10), image varchar(100000),  primary key (email));
+mysql> create table user (name varchar(50), email varchar(50), password varchar(50), otp varchar(4), activation varchar(50), status int default 0, pattern int, mobile varchar(10), image varchar(100000), x1 varchar(3), y1 varchar(3), x2 varchar(3), y2 varchar(3), x3 varchar(3), y3 varchar(3), primary key (email));
 
 
 

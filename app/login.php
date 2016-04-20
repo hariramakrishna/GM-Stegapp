@@ -573,7 +573,7 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 					var url = "send_otp_sms.php";
 					var email = $("#Email").val();
 					console.log(email);
-					/*$.post(url, { user_email : email }, function(response,status){
+					$.post(url, { user_email : email }, function(response,status){
 						if(response == "true")
 						{
 							$("#myModalPin").modal("show");
@@ -581,8 +581,8 @@ print "<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> I'm about to learn PHP!";
 						else
 							window.alert(response);
 
-					});	*/
-						$("#myModalPin").modal("show");
+					});	
+						//$("#myModalPin").modal("show");
 						
 				}
 				else

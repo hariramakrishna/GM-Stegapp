@@ -328,7 +328,7 @@ echo "endedd";
 				idleTime = idleTime + 10;//adding 10 seconds
 				console.log("time: "+ idleTime);
 				if (idleTime > 40) { // 10 minutes
-
+					window.alert("Your session has expired due to inactivity.");
 					window.location = <?php echo "\"/app-v/login.php\""?>;
 				}
 			}

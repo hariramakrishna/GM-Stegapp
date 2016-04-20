@@ -155,127 +155,16 @@ echo "endedd";
 			</iframe>
 
 			
-
-
-
-
-
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
         </div>
 		
 		
 	
-        
-        <!--First Service Row-->
-        <div class="row">
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-thumbs-up fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Built w/ Bootstrap</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-flag fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Over 249 Icons</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        
-        <!--Second Service Row-->
-        <div class="row">
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-mobile-phone fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Mobile Responsive</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-file fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Easy To Customize</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!--Third Service Row-->
-        <div class="row">
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-bolt fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Lightning Fast</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-sm-6 margin-60">
-            <div class="row">
-              <div class="col-sm-3 service-icons text-center">
-                <i class="fa fa-heart fa-4x light-gray"></i>
-              </div>
-              
-              <div class="col-sm-9 text-left">
-                <h3>Good looking</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt. </p>
-              </div>
-            </div>
-          </div>
-        </div>
+
         
       </div>
     </section>
     
-    <!--Message Section-->
-    <section id="content2" class="section">
-      <div class="container">
-        <div class="row margin-40">
-          <div class="col-sm-12 text-center">
-            <h2><span class="dark-gray"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</span></h2>
-            
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-sm-12 text-center">
-            <a class="btn-main" href="signup.html"><i class="icon-chevron-right"></i> Sign Up</a>
-          </div>
-        </div>
-      </div>
-    </section>
     
     
     <!--Bottom Section-->
@@ -368,7 +257,7 @@ echo "endedd";
 			idleTime = idleTime + 10;//adding 10 seconds
 			console.log("time: "+ idleTime);
 			if (idleTime > 40) { // 10 minutes
-
+				window.alert("Your session has expired due to inactivity.");
 				window.location = <?php echo "\"/app-v/login.php\""?>;
 			}
 		}

@@ -85,6 +85,7 @@ has been sent to '.$Email.' Please click on the Activation Link to Activate your
 
 
             } else { // If it did not run OK.
+				print "<br/> <br/> <br/> <br/>";
                 echo '<div class="errormsgbox">You could not be registered due to a system
 error. We apologize for any
 inconvenience.</div>';
